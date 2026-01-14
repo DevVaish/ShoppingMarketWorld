@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - ShoppingMarketWorld</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .products-page {
+            padding-top: 80px;
+            min-height: 100vh;
+        }
+
+        .page-header {
+            text-align: center;
+            padding: 3rem 0;
+            background: linear-gradient(135deg, #FDFBF7 0%, #F5F1E8 100%);
+        }
+
+        .filters-section {
+            background-color: var(--color-surface);
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--color-border);
+            position: sticky;
+            top: 60px;
+            z-index: 100;
+        }
+
+        .filters-container {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.75rem 1.5rem;
+            background-color: var(--color-bg);
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
+            font-family: var(--font-sans);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background-color: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
+        }
+
+        .sort-select {
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
+            font-family: var(--font-sans);
+            background-color: white;
+            cursor: pointer;
+        }
+
+        .products-count {
+            font-family: var(--font-sans);
+            color: var(--color-text-light);
+            font-size: 0.875rem;
+        }
+
+        .products-content {
+            padding: 3rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .filters-container {
+                flex-direction: column;
+            }
+
+            .filter-group {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="../index.html">
+                        <span class="logo-icon">◐</span>
+                        <span class="logo-text-nav">ShoppingMarketWorld</span>
+                    </a>
+                </div>
+                
+                <nav class="nav" id="nav">
+                    <ul class="nav-list">
+                        <li><a href="../index.html" class="nav-link">Home</a></li>
+                        <li><a href="products.html" class="nav-link active">Products</a></li>
+                        <li><a href="services.html" class="nav-link">Services</a></li>
+                        <li><a href="blogs.html" class="nav-link">Blog</a></li>
+                        <li><a href="contact.html" class="nav-link">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <button class="cart-btn" id="cartBtn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 2L7.17 5M16.83 5L15 2M7.17 5L5 9H19L16.83 5M7.17 5H16.83M5 9L6 21H18L19 9H5Z"/>
+                        </svg>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </button>
+                    <button class="menu-toggle" id="menuToggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="close-cart" id="closeCart">✕</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p class="empty-cart">Your cart is empty</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">$0.00</span>
+            </div>
+            <button class="checkout-btn">Checkout</button>
+        </div>
+    </div>
+
+    <div class="cart-overlay" id="cartOverlay"></div>
+
+    <!-- Products Page -->
+    <div class="products-page " >
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="container" >
+                <span class="section-label">Explore Our Collection</span>
+                <h1 class="section-title">All Products</h1>
+                <p class="section-description">Discover our carefully curated selection of premium products</p>
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="filters-section">
+            <div class="container">
+                <div class="filters-container">
+                    <div class="filter-group">
+                        <button class="filter-btn active" data-filter="all">All Products</button>
+                        <button class="filter-btn" data-filter="lifestyle">Lifestyle</button>
+                        <button class="filter-btn" data-filter="home">Home & Living</button>
+                        <button class="filter-btn" data-filter="tech">Technology</button>
+                        <button class="filter-btn" data-filter="fashion">Fashion</button>
+                    </div>
+                    <div>
+                        <select class="sort-select" id="sortSelect">
+                            <option value="featured">Featured</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="name">Name: A to Z</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="products-content">
+            <div class="container">
+                <p class="products-count" id="productsCount">Showing 18 products</p>
+                
+                <div class="products-grid" id="productsGrid">
+                    <!-- Lifestyle Products -->
+                    <div class="product-card" data-category="lifestyle" data-price="299.99" data-name="Premium Watch">
+                        <div class="product-image">
+                            <img src="../images/premium watch.jpg" alt="Premium Watch" loading="lazy">
+                            <div class="product-overlay">
+                                <button class="quick-add" data-product='{"id":1,"name":"Premium Watch","price":299.99,"image":"../images/premium watch.jpg"}'>Quick Add</button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Accessories</span>
+                            <h3 class="product-name">Premium Watch</h3>
+                            <p class="product-description">Timeless elegance meets modern precision</p>
+                            <div class="product-footer">
+                                <span class="product-price">$299.99</span>
+                                <button class="add-to-cart" data-product='{"id":1,"name":"Premium Watch","price":299.99,"image":"../images/premium watch.jpg"}'>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M12 5v14M5 12h14"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="lifestyle" data-price="179.99" data-name="Leather Bag">
+                        <div class="product-image">
+                            <img src="../images/leather bag.jpg" alt="Leather Bag" loading="lazy">
+                            <div class="product-overlay">
+                                <button class="quick-add" data-product='{"id":4,"name":"Leather Bag","price":179.99,"image":"../images/leather bag.jpg"}'>Quick Add</button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Fashion</span>
+                            <h3 class="product-name">Leather Bag</h3>
+                            <p class="product-description">Crafted from genuine leather</p>
+                            <div class="product-footer">
+                                <span class="product-price">$179.99</span>
+                                <button class="add-to-cart" data-product='{"id":4,"name":"Leather Bag","price":179.99,"image":"../images/leather bag.jpg"}'>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M12 5v14M5 12h14"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="lifestyle" data-price="199.99" data-name="Designer Sunglasses">
+                        <div class="product-image">
+                            <img src="../images/sunglasses.jpg" alt="Sunglasses" loading="lazy">
+                            <div class="product-overlay">
+                                <button class="quick-add" data-product='{"id":6,"name":"Designer Sunglasses","price":199.99,"image":"../images/sunglasses.jpg}'>Quick Add</button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Accessories</span>
+                            <h3 class="product-name">Designer Sunglasses</h3>
+                            <p class="product-description">UV protection with style</p>
+                            <div class="product-footer">
+                                <span class="product-price">$199.99</span>
+                                <button class="add-to-cart" data-product='{"id":6,"name":"Designer Sunglasses","price":199.99,"image":"../images/sunglasses.jpg"}'>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M12 5v14M5 12h14"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Home Products -->
+                    <div class="product-card" data-category="home" data-price="89.99" data-name="Ceramic Vase">
+                        <div class="product-image">
+                            <img src="../images/leather bag.jpg" alt="Ceramic Vase" loading="lazy">
+                            <div class="product-overlay">
+                                <button class="quick-add" data-product='{"id":2,"name":"Ceramic Vase","price":89.99,"image":"../images/leather bag.jpg"}'>Quick Add</button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Home Decor</span>
+                            <h3 class="product-name">Ceramic Vase</h3>
+                            <p class="product-description">Handcrafted artisan pottery</p>
+                            <div class="product-footer">
+                                <span class="product-price">$89.99</span>
+                                <button class="add-to-cart" data-product='{"id":2,"name":"Ceramic Vase","price":89.99,"image":"../images/leather bag.jpg"}'>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M12 5v14M5 12h14"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="home" data-price="129.99" data-name="Minimalist Lamp">
+                        <div class="product-image">
+                            <img src="../images/lamp.jpg" alt="Minimalist Lamp" loading="lazy">
+                            <div class="product-overlay">
+                                <button class="quick-add" data-product='{"id":5,"name":"Minimalist Lamp","price":129.99,"image":"../images/lamp.jpg"}'>Quick Add</button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Lighting</span>
+                            <h3 class="product-name">Minimalist Lamp</h3>
+                            <p class="product-description">Scandinavian inspired design</p>
+                            <div class="product-footer">
+                                <span class="product-price">$129.99</span>
+                                <button class="add-to-cart" data-product='{"id":5,"name":"Minimalist Lamp","price":129.99,"image":"../images/lamp.jpg"}'>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M12 5v14M5 12h14"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="home" data-price="149.99" data-name="Wooden Coffee Table">
+                        <div class="product-image">
+                            <img src="../images/Table.png" alt="Coffee Table" loading="lazy">
+                            <div class="product-overlay">
+                                <button class="quick-add" data-product='{"id":7,"name":"Wooden Coffee Table","price":149.99,"image":"../images/Table.png"}'>Quick Add</button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Furniture</span>
+                            <h3 class="product-name">Wooden Coffee Table</h3>
+                            <p class="product-description">Sustainable oak construction</p>
+                            <div class="product-footer">
+                                <span class="product-price">$149.99</span>
+                                <button class="add-to-cart" data-product='{"id":7,"name":"Wooden Coffee Table","price":149.99,"image":"../images/Table.png"}'>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M12 5v14M5 12h14"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tech Products -->
+                    <div class="product-card" data-category="tech" data-price="249.99" data-name="Wireless Headphones">
+                        <div class="product-image">
+                            <img src="../images/headphones.jpg" alt="Wireless Headphones" loading="lazy">
+                            <div class="product-overlay">
+                                <button class="quick-add" data-product='{"id":3,"name":"Wireless Headphones","price":249.99,"image":"../images/headphones.jpg"}'>Quick Add</button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Technology</span>
+                            <h3 class="product-name">Wireless Headphones</h3>
+                            <p class="product-description">Premium sound quality</p>
+                            <div class="product-footer">
+                                <span class="product-price">$249.99</span>
+                                <button class="add-to-cart" data-product='{"id":3,"name":"Wireless Headphones","price":249.99,"image":"../images/headphones.jpg"}'>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M12 5v14M5 12h14"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="tech" data-price="399.99" data-name="Smart Speaker">
+                        <div class="product-image">
+                            <img src="../images/speaker.jpg" alt="Smart Speaker" loading="lazy">
+                            <div class="product-overlay">
+                                <button class="quick-add" data-product='{"id":8,"name":"Smart Speaker","price":399.99,"image":"../images/speaker.jpg"}'>Quick Add</button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Technology</span>
+                            <h3 class="product-name">Smart Speaker</h3>
+                            <p class="product-description">Voice-activated assistant</p>
+                            <div class="product-footer">
+                                <span class="product-price">$399.99</span>
+                                <button class="add-to-cart" data-product='{"id":8,"name":"Smart Speaker","price":399.99,"image":"../images/speaker.jpg"}'>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M12 5v14M5 12h14"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Fashion Products -->
+                    <div class="product-card" data-category="fashion" data-price="159.99" data-name="Woolen Cap">
+                        <div class="product-image">
+                            <img src="../images/woolen cap.jpg" alt="Woolen Cap" loading="lazy">
+                            <div class="product-overlay">
+                                <button class="quick-add" data-product='{"id":10,"name":"Woolen Cap","price":159.99,"image":"../images/woolen cap.jpg"}'>Quick Add</button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Fashion</span>
+                            <h3 class="product-name">Woolen Cap</h3>
+                            <p class="product-description">Classic vintage wash</p>
+                            <div class="product-footer">
+                                <span class="product-price">$159.99</span>
+                                <button class="add-to-cart" data-product='{"id":10,"name":"Denim Jacket","price":159.99,"image":"../images/woolen cap.jpg"}'>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M12 5v14M5 12h14"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="fashion" data-price="89.99" data-name="Cotton T-Shirt">
+                        <div class="product-image">
+                            <img src="../images/tshirt.jpg" alt="T-Shirt" loading="lazy">
+                            <div class="product-overlay">
+                                <button class="quick-add" data-product='{"id":11,"name":"Cotton T-Shirt","price":89.99,"image":"../images/tshirt.jpg"}'>Quick Add</button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Fashion</span>
+                            <h3 class="product-name">Cotton T-Shirt</h3>
+                            <p class="product-description">Organic premium cotton</p>
+                            <div class="product-footer">
+                                <span class="product-price">$39.99</span>
+                                <button class="add-to-cart" data-product='{"id":11,"name":"Cotton T-Shirt","price":39.99,"image":"../images/tshirt.jpg"}'>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M12 5v14M5 12h14"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="fashion" data-price="219.99" data-name="Sneakers">
+                        <div class="product-image">
+                            <img src="../images/sneakers.jpg" alt="Sneakers" loading="lazy">
+                            <div class="product-overlay">
+                                <button class="quick-add" data-product='{"id":12,"name":"Sneakers","price":219.99,"image":"../images/sneakers.jpg"}'>Quick Add</button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Footwear</span>
+                            <h3 class="product-name">Sneakers</h3>
+                            <p class="product-description">Italian crafted comfort</p>
+                            <div class="product-footer">
+                                <span class="product-price">$219.99</span>
+                                <button class="add-to-cart" data-product='{"id":12,"name":"Leather Sneakers","price":219.99,"image":"../images/sneakers.jpg"}'>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M12 5v14M5 12h14"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- More Lifestyle -->
+                    <div class="product-card" data-category="lifestyle" data-price="59.99" data-name="Yoga Mat">
+                        <div class="product-image">
+                            <img src="../images/yoga mat.jpg" alt="Yoga Mat" loading="lazy">
+                            <div class="product-overlay">
+                                <button class="quick-add" data-product='{"id":13,"name":"Yoga Mat","price":59.99,"image":"../images/yoga mat.jpg"}'>Quick Add</button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Wellness</span>
+                            <h3 class="product-name">Yoga Mat</h3>
+                            <p class="product-description">Eco-friendly natural rubber</p>
+                            <div class="product-footer">
+                                <span class="product-price">$59.99</span>
+                                <button class="add-to-cart" data-product='{"id":13,"name":"Yoga Mat","price":59.99,"image":"../images/yoga mat.jpg"}'>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M12 5v14M5 12h14"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="lifestyle" data-price="119.99" data-name="Water Bottle">
+                        <div class="product-image">
+                            <img src="../images/bottle.jpg" alt="Water Bottle" loading="lazy">
+                            <div class="product-overlay">
+                                <button class="quick-add" data-product='{"id":14,"name":"Stainless Water Bottle","price":119.99,"image":"../images/bottle.jpg"}'>Quick Add</button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Lifestyle</span>
+                            <h3 class="product-name">Stainless Water Bottle</h3>
+                            <p class="product-description">Insulated 24hr cold/hot</p>
+                            <div class="product-footer">
+                                <span class="product-price">$45.99</span>
+                                <button class="add-to-cart" data-product='{"id":14,"name":"Stainless Water Bottle","price":45.99,"image":"../images/bottle.jpg"}'>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M12 5v14M5 12h14"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="home" data-price="99.99" data-name="Comfy Sofa">
+                        <div class="product-image">
+                            <img src="../images/sofa (3).png" alt="Blanket" loading="lazy">
+                            <div class="product-overlay">
+                                <button class="quick-add" data-product='{"id":15,"name":"Comfy Sofa","price":99.99,"image":"../images/sofa (3).png"}'>Quick Add</button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Home</span>
+                            <h3 class="product-name">Comfy Sofa</h3>
+                            <p class="product-description">Soft merino wool blend</p>
+                            <div class="product-footer">
+                                <span class="product-price">$99.99</span>
+                                <button class="add-to-cart" data-product='{"id":15,"name":"Comfy Sofa","price":99.99,"image":"../images/sofa (3).png"}'>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M12 5v14M5 12h14"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="home" data-price="159.99" data-name="Round Table">
+                        <div class="product-image">
+                            <img src="../images/Table.png" alt="Charger" loading="lazy">
+                            <div class="product-overlay">
+                                <button class="quick-add" data-product='{"id":16,"name":"Wireless Charger","price":159.99,"image":"../images/Table.png"}'>Quick Add</button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Home Decor</span>
+                            <h3 class="product-name">Round Table</h3>
+                            <p class="product-description">Perfectly round. Perfectly balanced</p>
+                            <div class="product-footer">
+                                <span class="product-price">$69.99</span>
+                                <button class="add-to-cart" data-product='{"id":16,"name":"Round Table","price":69.99,"image":"../images/Table.png"}'>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M12 5v14M5 12h14"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="fashion" data-price="129.99" data-name="Wool Scarf">
+                        <div class="product-image">
+                            <img src="../images/scarf.jpg" alt="Scarf" loading="lazy">
+                            <div class="product-overlay">
+                                <button class="quick-add" data-product='{"id":17,"name":"Wool Scarf","price":129.99,"image":"../images/scarf.jpg"}'>Quick Add</button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Accessories</span>
+                            <h3 class="product-name">Wool Scarf</h3>
+                            <p class="product-description">Cashmere blend warmth</p>
+                            <div class="product-footer">
+                                <span class="product-price">$79.99</span>
+                                <button class="add-to-cart" data-product='{"id":17,"name":"Wool Scarf","price":79.99,"image":"../images/scarf.jpg"}'>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M12 5v14M5 12h14"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="home" data-price="189.99" data-name="Sofa Setr">
+                        <div class="product-image">
+                            <img src="../images/sofa set.jpg" alt="Sofa Set" loading="lazy">
+                            <div class="product-overlay">
+                                <button class="quick-add" data-product='{"id":18,"name":"Wall Mirror","price":189.99,"image":"../images/sofa set.jpg"}'>Quick Add</button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Home Decor</span>
+                            <h3 class="product-name">Sofa Set</h3>
+                            <p class="product-description">Brass frame elegance</p>
+                            <div class="product-footer">
+                                <span class="product-price">$189.99</span>
+                                <button class="add-to-cart" data-product='{"id":18,"name":"Sofa Set","price":189.99,"image":"../images/sofa set.jpg"}'>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M12 5v14M5 12h14"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-section">
+                    <div class="footer-logo">
+                        <span class="logo-icon">◐</span>
+                        <span class="logo-text">ShoppingMarketWorld</span>
+                    </div>
+                    <p class="footer-description">Curating excellence for modern living since 2020. Quality products, exceptional service.</p>
+                    <div class="footer-social">
+                        <a href="#" class="social-link">Instagram</a>
+                        <a href="#" class="social-link">Twitter</a>
+                        <a href="#" class="social-link">Facebook</a>
+                    </div>
+                </div>
+            <div class="footer-content">
+                
+
+                <div class="footer-section">
+                    <h4 class="footer-title">Shop</h4>
+                    <ul class="footer-links">
+                        <li><a href="pages/products.html">All Products</a></li>
+                        <li><a href="pages/products.html?category=lifestyle">Lifestyle</a></li>
+                        <li><a href="pages/products.html?category=home">Home & Living</a></li>
+                        <li><a href="pages/products.html?category=tech">Technology</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4 class="footer-title">Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="pages/services.html">Services</a></li>
+                        <li><a href="pages/blogs.html">Blog</a></li>
+                        <li><a href="pages/contact.html">Contact</a></li>
+                        <li><a href="#">About Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4 class="footer-title">Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 ShoppingMarketWorld. All rights reserved.</p>
+                <p>Designed with care for mindful shoppers.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/products.js"></script>
+</body>
+</html>

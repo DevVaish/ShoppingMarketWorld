@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShoppingMarketWorld - Premium Lifestyle Shopping</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <span class="logo-icon">◐</span>
+                        <span class="logo-text-nav">ShoppingMarketWorld</span>
+                    </a>
+                </div>
+                
+                <nav class="nav" id="nav">
+                    <ul class="nav-list">
+                        <li><a href="index.html" class="nav-link active">Home</a></li>
+                        <li><a href="pages/products.html" class="nav-link">Products</a></li>
+                        <li><a href="pages/services.html" class="nav-link">Services</a></li>
+                        <li><a href="pages/blogs.html" class="nav-link">Blog</a></li>
+                        <li><a href="pages/contact.html" class="nav-link">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <button class="cart-btn" id="cartBtn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 2L7.17 5M16.83 5L15 2M7.17 5L5 9H19L16.83 5M7.17 5H16.83M5 9L6 21H18L19 9H5Z"/>
+                        </svg>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </button>
+                    <button class="menu-toggle" id="menuToggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="close-cart" id="closeCart">✕</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p class="empty-cart">Your cart is empty</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">$0.00</span>
+            </div>
+            <button class="checkout-btn">Checkout</button>
+        </div>
+    </div>
+
+    <div class="cart-overlay" id="cartOverlay"></div>
+
+    <!-- Hero Banner -->
+    <section class="hero">
+        <div class="hero-background"></div>
+        <div class="container">
+            <div class="hero-content">
+                <span class="hero-label">Winter Collection 2026</span>
+                <h1 class="hero-title">
+                    <span class="reveal-text">Curated</span>
+                    <span class="reveal-text">Excellence</span>
+                    <span class="reveal-text">For Modern Living</span>
+                </h1>
+                <p class="hero-description">Discover thoughtfully selected products that blend timeless design with contemporary functionality.</p>
+                <div class="hero-buttons">
+                    <a href="pages/products.html" class="btn btn-primary">Explore Collection</a>
+                    <a href="#featured" class="btn btn-secondary smooth-scroll">View Featured</a>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="featured-products" id="featured">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Handpicked Selection</span>
+                <h2 class="section-title">Featured Products</h2>
+                <p class="section-description">Our most loved items, chosen for their exceptional quality and design</p>
+            </div>
+
+            <div class="products-grid">
+                <div class="product-card" data-category="lifestyle" data-price="299.99" data-name="Premium Watch">
+                        <div class="product-image">
+                            <img src="../images/premium watch.jpg" alt="Premium Watch" loading="lazy">
+                            <div class="product-overlay">
+                                <button class="quick-add" data-product='{"id":1,"name":"Premium Watch","price":299.99,"image":"../images/premium watch.jpg"}'>Quick Add</button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Accessories</span>
+                            <h3 class="product-name">Premium Watch</h3>
+                            <p class="product-description">Timeless elegance meets modern precision</p>
+                            <div class="product-footer">
+                                <span class="product-price">$299.99</span>
+                                <button class="add-to-cart" data-product='{"id":1,"name":"Premium Watch","price":299.99,"image":"../images/premium watch.jpg"}'>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M12 5v14M5 12h14"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                <div class="product-card" data-category="lifestyle" data-price="199.99" data-name="Designer Sunglasses">
+                        <div class="product-image">
+                            <img src="../images/sunglasses.jpg" alt="Sunglasses" loading="lazy">
+                            <div class="product-overlay">
+                                <button class="quick-add" data-product='{"id":6,"name":"Designer Sunglasses","price":199.99,"image":"../images/sunglasses.jpg}'>Quick Add</button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Accessories</span>
+                            <h3 class="product-name">Designer Sunglasses</h3>
+                            <p class="product-description">UV protection with style</p>
+                            <div class="product-footer">
+                                <span class="product-price">$199.99</span>
+                                <button class="add-to-cart" data-product='{"id":6,"name":"Designer Sunglasses","price":199.99,"image":"../images/sunglasses.jpg"}'>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M12 5v14M5 12h14"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+               <div class="product-card" data-category="home" data-price="89.99" data-name="Ceramic Vase">
+                        <div class="product-image">
+                            <img src="../images/leather bag.jpg" alt="Ceramic Vase" loading="lazy">
+                            <div class="product-overlay">
+                                <button class="quick-add" data-product='{"id":2,"name":"Ceramic Vase","price":89.99,"image":"../images/leather bag.jpg"}'>Quick Add</button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Home Decor</span>
+                            <h3 class="product-name">Ceramic Vase</h3>
+                            <p class="product-description">Handcrafted artisan pottery</p>
+                            <div class="product-footer">
+                                <span class="product-price">$89.99</span>
+                                <button class="add-to-cart" data-product='{"id":2,"name":"Ceramic Vase","price":89.99,"image":"../images/leather bag.jpg"}'>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M12 5v14M5 12h14"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                <div class="product-card" data-category="fashion" data-price="159.99" data-name="Woolen Cap">
+                        <div class="product-image">
+                            <img src="../images/woolen cap.jpg" alt="Woolen Cap" loading="lazy">
+                            <div class="product-overlay">
+                                <button class="quick-add" data-product='{"id":10,"name":"Woolen Cap","price":159.99,"image":"../images/woolen cap.jpg"}'>Quick Add</button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Fashion</span>
+                            <h3 class="product-name">Woolen Cap</h3>
+                            <p class="product-description">Classic vintage wash</p>
+                            <div class="product-footer">
+                                <span class="product-price">$159.99</span>
+                                <button class="add-to-cart" data-product='{"id":10,"name":"Denim Jacket","price":159.99,"image":"../images/woolen cap.jpg"}'>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M12 5v14M5 12h14"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                <div class="product-card" data-category="tech" data-price="399.99" data-name="Smart Speaker">
+                        <div class="product-image">
+                            <img src="../images/speaker.jpg" alt="Smart Speaker" loading="lazy">
+                            <div class="product-overlay">
+                                <button class="quick-add" data-product='{"id":8,"name":"Smart Speaker","price":399.99,"image":"../images/speaker.jpg"}'>Quick Add</button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Technology</span>
+                            <h3 class="product-name">Smart Speaker</h3>
+                            <p class="product-description">Voice-activated assistant</p>
+                            <div class="product-footer">
+                                <span class="product-price">$399.99</span>
+                                <button class="add-to-cart" data-product='{"id":8,"name":"Smart Speaker","price":399.99,"image":"../images/speaker.jpg"}'>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M12 5v14M5 12h14"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                <div class="product-card" data-category="lifestyle" data-price="59.99" data-name="Yoga Mat">
+                        <div class="product-image">
+                            <img src="../images/yoga mat.jpg" alt="Yoga Mat" loading="lazy">
+                            <div class="product-overlay">
+                                <button class="quick-add" data-product='{"id":13,"name":"Yoga Mat","price":59.99,"image":"../images/yoga mat.jpg"}'>Quick Add</button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Wellness</span>
+                            <h3 class="product-name">Yoga Mat</h3>
+                            <p class="product-description">Eco-friendly natural rubber</p>
+                            <div class="product-footer">
+                                <span class="product-price">$59.99</span>
+                                <button class="add-to-cart" data-product='{"id":13,"name":"Yoga Mat","price":59.99,"image":"../images/yoga mat.jpg"}'>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M12 5v14M5 12h14"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="categories">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Browse by Interest</span>
+                <h2 class="section-title">Shop Categories</h2>
+            </div>
+
+            <div class="categories-grid">
+                <a href="pages/products.html?category=lifestyle" class="category-card">
+                    <div class="category-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 6v6l4 2"/>
+                        </svg>
+                    </div>
+                    <h3 class="category-name">Lifestyle</h3>
+                    <p class="category-count">124 Products</p>
+                </a>
+
+                <a href="pages/products.html?category=home" class="category-card">
+                    <div class="category-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
+                            <path d="M9 22V12h6v10"/>
+                        </svg>
+                    </div>
+                    <h3 class="category-name">Home & Living</h3>
+                    <p class="category-count">89 Products</p>
+                </a>
+
+                <a href="pages/products.html?category=tech" class="category-card">
+                    <div class="category-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="2" y="3" width="20" height="14" rx="2"/>
+                            <path d="M8 21h8M12 17v4"/>
+                        </svg>
+                    </div>
+                    <h3 class="category-name">Technology</h3>
+                    <p class="category-count">156 Products</p>
+                </a>
+
+                <a href="pages/products.html?category=fashion" class="category-card">
+                    <div class="category-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z"/>
+                        </svg>
+                    </div>
+                    <h3 class="category-name">Fashion</h3>
+                    <p class="category-count">203 Products</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Buy From Us -->
+    <section class="features">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Our Commitment</span>
+                <h2 class="section-title">Why Choose Us</h2>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Curated Selection</h3>
+                    <p class="feature-description">Every product is carefully selected for quality, design, and functionality by our expert team.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Secure Shopping</h3>
+                    <p class="feature-description">Shop with confidence using our encrypted checkout and secure payment processing.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Customer Delight</h3>
+                    <p class="feature-description">24/7 support team ready to assist you with any questions or concerns you may have.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+                            <circle cx="12" cy="10" r="3"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Fast Delivery</h3>
+                    <p class="feature-description">Free shipping on orders over $100. Express delivery available to major cities.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews -->
+    <section class="reviews">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Customer Love</span>
+                <h2 class="section-title">What People Say</h2>
+            </div>
+
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">"The quality exceeded my expectations. Every detail is thoughtfully crafted. Will definitely shop here again!"</p>
+                    <div class="review-author">
+                        <div class="author-avatar">SM</div>
+                        <div class="author-info">
+                            <h4 class="author-name">Sarah Mitchell</h4>
+                            <p class="author-title">Design Enthusiast</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">"Fast shipping and exceptional customer service. The products are exactly as described. Highly recommend!"</p>
+                    <div class="review-author">
+                        <div class="author-avatar">JC</div>
+                        <div class="author-info">
+                            <h4 class="author-name">James Chen</h4>
+                            <p class="author-title">Tech Professional</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">"Beautiful products that bring joy to my home. The curation is impeccable and the quality is outstanding."</p>
+                    <div class="review-author">
+                        <div class="author-avatar">EA</div>
+                        <div class="author-info">
+                            <h4 class="author-name">Emma Anderson</h4>
+                            <p class="author-title">Interior Designer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <div class="newsletter-text">
+                    <span class="section-label">Stay Connected</span>
+                    <h2 class="section-title">Join Our Community</h2>
+                    <p class="section-description">Subscribe to receive exclusive offers, new arrivals, and inspiration delivered to your inbox.</p>
+                </div>
+                <form class="newsletter-form" id="newsletterForm">
+                    <div class="form-group">
+                        <input type="email" placeholder="Enter your email" class="form-input" required>
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </div>
+                    <p class="form-note">We respect your privacy. Unsubscribe at any time.</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-section">
+                    <div class="footer-logo">
+                        <span class="logo-icon">◐</span>
+                        <span class="logo-text">ShoppingMarketWorld</span>
+                    </div>
+                    <p class="footer-description">Curating excellence for modern living since 2020. Quality products, exceptional service.</p>
+                    <div class="footer-social">
+                        <a href="#" class="social-link">Instagram</a>
+                        <a href="#" class="social-link">Twitter</a>
+                        <a href="#" class="social-link">Facebook</a>
+                    </div>
+                </div>
+            <div class="footer-content">
+                
+
+                <div class="footer-section">
+                    <h4 class="footer-title">Shop</h4>
+                    <ul class="footer-links">
+                        <li><a href="pages/products.html">All Products</a></li>
+                        <li><a href="pages/products.html?category=lifestyle">Lifestyle</a></li>
+                        <li><a href="pages/products.html?category=home">Home & Living</a></li>
+                        <li><a href="pages/products.html?category=tech">Technology</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4 class="footer-title">Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="pages/services.html">Services</a></li>
+                        <li><a href="pages/blogs.html">Blog</a></li>
+                        <li><a href="pages/contact.html">Contact</a></li>
+                        <li><a href="#">About Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4 class="footer-title">Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 ShoppingMarketWorld. All rights reserved.</p>
+                <p>Designed with care for mindful shoppers.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
